@@ -35,14 +35,16 @@ jobs:
       - name: Set SHA tag
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      
-      # Push Docker image to GitHub Container Registry
-      - name: Build and push Docker image
+
+      # Build and push multi-architecture Docker image
+      - name: Build and push Docker image (multi-arch)
         uses: docker/build-push-action@v5
         with:
           context: .
           target: runner
           push: true
+          # Add multi-architecture support
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ steps.lower.outputs.owner }}/gympal-backend:${{ steps.vars.outputs.sha_short }}
             ghcr.io/${{ steps.lower.outputs.owner }}/gympal-backend:latest
