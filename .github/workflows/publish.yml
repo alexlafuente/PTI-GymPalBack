@@ -25,7 +25,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.REGISTRY_ACCESS_TOKEN }}
 
       - name: Set lowercase repo owner
         id: lower
@@ -81,4 +81,5 @@ jobs:
       #     git add values.yaml
       #     git commit -m "Update gympal-backend image tag to ${{ steps.vars.outputs.sha_short }}"
       #     git push origin main
+
 
